@@ -138,11 +138,15 @@ b. Run the regressions
     lm(time ~ year, data = filter(sprinters_orig, women == 0))
     ```
     Interpret each regression. How are they similar or different in their 
-    slopes?
+    slopes? Plot each of these using the `texreg` package.
+    ```{r,eval=FALSE}
+    htmlreg(..., stars = numeric())
+    ```
   
-c. Plot the results of these regressions.
-d. Use the function `predict` to predict the times of men and women in the 2156 Olympics. Is this plausible? 
-
+c. Plot the fitted values of these regressions. The function `augment` in the **broom** package is useful for this.
+d. Use the function `predict` to predict the times of men and women in the 2156 Olympics. Is this plausible?
+e. Calculate the root mean squared residuals for the regression `time ~ year * women`.
+   Predict the values for the years after 2004 for both Olympics and World Championships. What is the root mean squared residuals for these predictions? 
 
 [^1]: Przeworski, Adam, Michael E. Alvarez, Jose Antonio Cheibub, and Fernando Limongi. 2000. *Democracy and Development: Political Institutions and Well-Being in the World, 1950-1990*. Cambridge University Press.
 [^anscombe]: These data are from: Anscombe, F. J. (1973). "Graphs in Statistical Analysis". *American Statistician* 27 (1): 17–21.
