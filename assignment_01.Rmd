@@ -115,7 +115,7 @@ b. Create a scatter plot of each dataset and its linear regression fit. Hint: yo
 
 In a 2004 paper in *Nature*, Tatem et al. estimate the trend lines of sprint times for men and women using the winning times of the 100-meters in the Olympics.[^sprint1] They report that using current trends, in the 2156 Olympics, the women's 100-meter will have a faster time.[^sprint2]
 
-The file 
+The dataset includes the winning times from the 100-meter dash for both men and women for all Olympics 1900-2012 and Track & Field World Championships finals 1976-2015.
 
 | Variable | Description |
 |:---|:---|
@@ -124,33 +124,45 @@ The file
 | `women` | 1 if women's race; 0 if men's race |
 | `olympics` | 1 if in the olympics; 0 if in the World Championships |
 
-Load the data into R,
-```{r, eval=FALSE}
+Load the data into R from the csv file:
+```{r}
 sprinters <- read.csv("sprinters.csv")
 ```
 
 a. The referenced paper only used data from the Olympics 2004 and before. Create a new dataset named `sprinters_orig` with only those observations.
 
+```{r}
+sprinters_orig <-
+  filter(sprinters,
+         year <= 2004,
+         olympics == 1)
+```
+
 b. Run the regressions
-    ```{r, eval = FALSE}
-    library("dplyr")
-    lm(time ~ year + women, data = sprinters_orig)
-    lm(time ~ year * women, data = sprinters_orig)
-    lm(time ~ year, data = filter(sprinters_orig, women == 1))
-    lm(time ~ year, data = filter(sprinters_orig, women == 0))
-    ```
-    Interpret each regression. How are they similar or different in their 
-    slopes? Plot each of these using the `texreg` package.
-    ```{r,eval=FALSE}
-    htmlreg(..., stars = numeric())
-    ```
+```{r}
+library("dplyr")
+mod1 <- lm(time ~ year + women, data = sprinters_orig)
+mod2 <- lm(time ~ year * women, data = sprinters_orig)
+mod3 <- lm(time ~ year, data = filter(sprinters_orig, women == 1))
+mod4 <- lm(time ~ year, data = filter(sprinters_orig, women == 0))
+```
+Interpret each regression. How are they similar or different in their 
+slopes? Plot each of these using the **texreg** package.
+```{r results='asis', message = FALSE}
+library("texreg")
+htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric())
+```
   
-c. Plot the fitted values of these regressions. The function `augment` in the **broom** package is useful for this.
+c. Plot the fitted values of these regressions against the original values. The function `augment` in the **broom** package is useful for this.
+
 d. Use the function `predict` to predict the times of men and women in the 2156 Olympics. Is this plausible?
-e. Calculate the root mean squared residuals for the regression `time ~ year * women`.
-   Predict the values for the years after 2004 for both Olympics and World Championships. What is the root mean squared residuals for these predictions? 
+
+e. Calculate the square root of the mean of the squared residuals (root mean squared error or RMSE) for the regression `time ~ year * women`.
+   Predict the values for the years after 2004 for both Olympics and World Championships. What are the root mean squared residuals for these predictions?
+   Is it surprising that the RMSE for the predictions out of
+   the sample are lower than those in the sample? 
 
 [^1]: Przeworski, Adam, Michael E. Alvarez, Jose Antonio Cheibub, and Fernando Limongi. 2000. *Democracy and Development: Political Institutions and Well-Being in the World, 1950-1990*. Cambridge University Press.
 [^anscombe]: These data are from: Anscombe, F. J. (1973). "Graphs in Statistical Analysis". *American Statistician* 27 (1): 17–21.
-[^sprint1]: ndrew J. Tatem, Carlos A. Guerra, Peter M. Atkinson & Simon I. Hay. 2004. "Athletics:  Momentous sprint at the 2156 Olympics?" *Nature.* <https://dx.doi.org/10.1038/431525>
+[^sprint1]: Andrew J. Tatem, Carlos A. Guerra, Peter M. Atkinson & Simon I. Hay. 2004. "Athletics:  Momentous sprint at the 2156 Olympics?" *Nature.* <https://dx.doi.org/10.1038/431525>
 [^sprint2]: I've read the short article several times. I still can't tell whether it is tongue in cheek.
