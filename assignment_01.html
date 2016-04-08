@@ -203,9 +203,11 @@ $(document).ready(function () {
 <ol style="list-style-type: lower-alpha">
 <li>Load the democracy data frame</li>
 </ol>
-<p><code>r   democracy &lt;- read.csv(file =   &quot;http://pols503.github.io/pols_503_sp15/data/democracy.csv&quot;, stringsAsFactors = FALSE)</code> When you run this, you will notice that some variables that should be numeric are not. There is a problem with how <code>read.csv</code> read missing values. Figure out how this dataset indicates missing values, and add the correct argument to <code>read.csv</code> to fix this problem.</p>
+<pre class="r"><code>democracy &lt;- read.csv(file = &quot;democracy.csv&quot;, stringsAsFactors = FALSE)</code></pre>
+<p>When you run this, you will notice that some variables that should be numeric are not. There is a problem with how <code>read.csv</code> read missing values. Figure out how this dataset indicates missing values, and add the correct argument to <code>read.csv</code> to fix this problem.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Create a data frame with statistics (means, medians, and ) for all variables. Instead of doing this with <code>summary</code>, use <strong>dplyr</strong> and <strong>tidyr</strong> as shown in the example [<a href="https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting" class="uri">https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting</a>].</p>
+<li>Create a data frame with statistics (means, medians, and ) for all variables. Instead of doing this with <code>summary</code>, use <strong>dplyr</strong> and <strong>tidyr</strong> as shown in the example [<a href="https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting" class="uri">https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting</a>].</li>
+</ol>
 <pre class="r"><code>dem_summary_stats &lt;-
   ... %&gt;% 
   group_by(...) %&gt;%
@@ -214,7 +216,8 @@ $(document).ready(function () {
   ungroup(...) %&gt;%
   unite(...) %&gt;%
   spread</code></pre>
-<p>Print this table using the function <code>kable</code> in the <strong>knitr</strong> package, an the code chunk option <code>results='asis</code>. See the <a href="http://rmarkdown.rstudio.com/authoring_rcodechunks.html">R Markdown Help</a>.</p></li>
+<pre><code>Print this table using the function `kable` in the **knitr** package, an the code chunk option `results='asis`. See the [R Markdown Help](http://rmarkdown.rstudio.com/authoring_rcodechunks.html).</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
 <li><p>Create a histogram for political liberties in which each unique value of the variable is in its own bin.</p></li>
 <li><p>Create a histogram for GDP per capita.</p></li>
 <li><p>Create a histogram for <strong>log</strong> GDP per capita. How is this histogram different than the one for GDP per capita when it was not logged.</p></li>
