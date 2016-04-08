@@ -10,7 +10,8 @@ output:
 
 1. [Fork this repository](https://help.github.com/articles/using-pull-requests/) to your GitHub account.
 2. Write your solutions in R Markdown in a file named `solutions.Rmd`.
-3. When you are ready to submit your assignment, [initiate a pull request](https://help.github.com/articles/using-pull-requests/#initiating-the-pull-request).
+3. When you are ready to submit your assignment, [initiate a pull request](https://help.github.com/articles/using-pull-requests/#initiating-the-pull-request). Title your
+pull request "Submission".
 
 
 ### Problem 1: Data Wrangling and Viz Refresher
