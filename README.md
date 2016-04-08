@@ -2,6 +2,11 @@
 
 ## Instructions
 
+1. [Fork this repository](https://help.github.com/articles/using-pull-requests/) to your GitHub account.
+2. Write your solutions in R Markdown in a file named `solutions.Rmd`.
+3. When you are ready to submit your assignment, [initiate a pull request](https://help.github.com/articles/using-pull-requests/#initiating-the-pull-request).
+
+
 ### Problem 1: Data Wrangling and Viz Refresher
 
 The file [democracy.csv](https://raw.githubusercontent.com/POLS503/pols_503_sp15/master/data/democracy.csv) contains data from Przeworski et. al, *Demoracy and Deveolpment: Political Institutions and Well-Being in the Worlds, 1950-1990* [^1].
@@ -36,7 +41,7 @@ a. Load the democracy data frame
 democracy <- read.csv(file = "democracy.csv", stringsAsFactors = FALSE)
 ```
 
-When you run this, you will notice that some variables that should be numeric are not. There is a problem with how `read.csv` read missing values. Figure out how this dataset indicates missing values, and add the correct argument to `read.csv` to fix this problem.
+When you run this, you will notice that `POLLIB` and `CIVLIB`, which should be integer variables with values 1--7, are character variables. There is a problem with how `read.csv` reads missing values. Figure out how this dataset indicates missing values, and add the correct argument to `read.csv` to fix this problem.
 
 a. Create a data frame with statistics (means, medians, and ) for all variables. Instead of doing this with `summary`, use **dplyr** and **tidyr** as shown in the example [https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting]. 
 
@@ -155,13 +160,14 @@ slopes? Plot each of these using the **texreg** package.
 
 ```r
 library("texreg")
-htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric())
+htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric(),
+        caption = "Trends in Winning Times in the Olympic 100-meter dash, 1896-2004")
 ```
 
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <table cellspacing="0" align="center" style="border: none;">
-<caption align="bottom" style="margin-top:0.3em;">Statistical models</caption>
+<caption align="bottom" style="margin-top:0.3em;">Trends in Winning Times in the Olympic 100-meter dash, 1896-2004</caption>
 <tr>
 <th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b></b></th>
 <th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b>Model 1</b></th>

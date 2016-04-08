@@ -120,6 +120,11 @@ $(document).ready(function () {
 
 <div id="instructions" class="section level2">
 <h2>Instructions</h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://help.github.com/articles/using-pull-requests/">Fork this repository</a> to your GitHub account.</li>
+<li>Write your solutions in R Markdown in a file named <code>solutions.Rmd</code>.</li>
+<li>When you are ready to submit your assignment, <a href="https://help.github.com/articles/using-pull-requests/#initiating-the-pull-request">initiate a pull request</a>.</li>
+</ol>
 <div id="problem-1-data-wrangling-and-viz-refresher" class="section level3">
 <h3>Problem 1: Data Wrangling and Viz Refresher</h3>
 <p>The file <a href="https://raw.githubusercontent.com/POLS503/pols_503_sp15/master/data/democracy.csv">democracy.csv</a> contains data from Przeworski et. al, <em>Demoracy and Deveolpment: Political Institutions and Well-Being in the Worlds, 1950-1990</em> <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. The data have been slightly recoded, to make higher values indicate higher levels of political liberty and democracy.</p>
@@ -206,7 +211,7 @@ $(document).ready(function () {
 <li>Load the democracy data frame</li>
 </ol>
 <pre class="r"><code>democracy &lt;- read.csv(file = &quot;democracy.csv&quot;, stringsAsFactors = FALSE)</code></pre>
-<p>When you run this, you will notice that some variables that should be numeric are not. There is a problem with how <code>read.csv</code> read missing values. Figure out how this dataset indicates missing values, and add the correct argument to <code>read.csv</code> to fix this problem.</p>
+<p>When you run this, you will notice that <code>POLLIB</code> and <code>CIVLIB</code>, which should be integer variables with values 1–7, are character variables. There is a problem with how <code>read.csv</code> reads missing values. Figure out how this dataset indicates missing values, and add the correct argument to <code>read.csv</code> to fix this problem.</p>
 <ol style="list-style-type: lower-alpha">
 <li>Create a data frame with statistics (means, medians, and ) for all variables. Instead of doing this with <code>summary</code>, use <strong>dplyr</strong> and <strong>tidyr</strong> as shown in the example [<a href="https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting" class="uri">https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting</a>].</li>
 </ol>
@@ -302,11 +307,12 @@ mod3 &lt;- lm(time ~ year, data = filter(sprinters_orig, women == 1))
 mod4 &lt;- lm(time ~ year, data = filter(sprinters_orig, women == 0))</code></pre>
 <p>Interpret each regression. How are they similar or different in their slopes? Plot each of these using the <strong>texreg</strong> package.</p>
 <pre class="r"><code>library(&quot;texreg&quot;)
-htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric())</code></pre>
+htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric(),
+        caption = &quot;Trends in Winning Times in the Olympic 100-meter dash, 1896-2004&quot;)</code></pre>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <table cellspacing="0" align="center" style="border: none;">
 <caption align="bottom" style="margin-top:0.3em;">
-Statistical models
+Trends in Winning Times in the Olympic 100-meter dash, 1896-2004
 </caption>
 <tr>
 <th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;">
