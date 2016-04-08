@@ -287,9 +287,11 @@ anscombe2 &lt;- anscombe %&gt;%
 lm(time ~ year * women, data = sprinters_orig)
 lm(time ~ year, data = filter(sprinters_orig, women == 1))
 lm(time ~ year, data = filter(sprinters_orig, women == 0))</code></pre>
-<p>Interpret each regression. How are they similar or different in their slopes?</p></li>
-<li>Plot the results of these regressions.</li>
-<li><p>Use the function <code>predict</code> to predict the times of men and women in the 2156 Olympics. Is this plausible?</p></li>
+<p>Interpret each regression. How are they similar or different in their slopes? Plot each of these using the <code>texreg</code> package.</p>
+<pre class="r"><code>htmlreg(..., stars = numeric())</code></pre></li>
+<li>Plot the fitted values of these regressions. The function <code>augment</code> in the <strong>broom</strong> package is useful for this.</li>
+<li>Use the function <code>predict</code> to predict the times of men and women in the 2156 Olympics. Is this plausible?</li>
+<li><p>Calculate the root mean squared residuals for the regression <code>time ~ year * women</code>. Predict the values for the years after 2004 for both Olympics and World Championships. What is the root mean squared residuals for these predictions?</p></li>
 </ol>
 </div>
 <div class="footnotes">

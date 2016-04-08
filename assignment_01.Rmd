@@ -125,13 +125,15 @@ The file
 | `olympics` | 1 if in the olympics; 0 if in the World Championships |
 
 Load the data into R,
-```{r, eval = FALSE}
+```{r, eval=FALSE}
 sprinters <- read.csv("sprinters.csv")
 ```
 
 a. The referenced paper only used data from the Olympics 2004 and before. Create a new dataset named `sprinters_orig` with only those observations.
+
 b. Run the regressions
     ```{r, eval = FALSE}
+    library("dplyr")
     lm(time ~ year + women, data = sprinters_orig)
     lm(time ~ year * women, data = sprinters_orig)
     lm(time ~ year, data = filter(sprinters_orig, women == 1))
