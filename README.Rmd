@@ -13,7 +13,7 @@ output:
 3. When you are ready to submit your assignment, [initiate a pull request](https://help.github.com/articles/using-pull-requests/#initiating-the-pull-request). Title your
 pull request "Submission".
 
-If you need to update from this file
+To update your fork from the upstream repository:
 
 1. On your fork, e.g. `https://github.com/jrnold/Assignment_01` click on "New Pull reqest"
 2. Set your fork `jrnold/Assignment_01` as the base fork on the left, and `UW-POLS503/Assignment_01` as the head fork on the right. In both cases the branch will be master. This means, compare any chanes in the head fork that are not in the base fork. You will see differences between the `US-POLS503` repo and your fork. Click on "Create Pull Request", and if there are no issues, "Click Merge" A quick way is to use this link, but change the `jrnold` to your own username: `https://github.com/jrnold/Assignment_01/compare/master...UW-POLS503:master`.
@@ -170,7 +170,7 @@ htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric(),
         caption = "Trends in Winning Times in the Olympic 100-meter dash, 1896-2004")
 ```
   
-c. Plot the fitted values of these regressions against the original values. The function `augment` in the **broom** package is useful for this.
+c. Plot the fitted values of these regressions against the original values. The function `augment` in the **broom** package is useful for this. See examples [here](https://uw-pols501.github.io/pols_501_wi16/lessons/cov_cor_regression).
 
 d. Use the function `predict` to predict the times of men and women in the 2156 Olympics. Is this plausible?
 
@@ -178,6 +178,7 @@ e. Calculate the square root of the mean of the squared residuals (root mean squ
    Predict the values for the years after 2004 for both Olympics and World Championships. What are the root mean squared residuals for these predictions?
    Is it surprising that the RMSE for the predictions out of
    the sample are lower than those in the sample? 
+   
 
 [^1]: Przeworski, Adam, Michael E. Alvarez, Jose Antonio Cheibub, and Fernando Limongi. 2000. *Democracy and Development: Political Institutions and Well-Being in the World, 1950-1990*. Cambridge University Press.
 [^anscombe]: These data are from: Anscombe, F. J. (1973). "Graphs in Statistical Analysis". *American Statistician* 27 (1): 17–21.

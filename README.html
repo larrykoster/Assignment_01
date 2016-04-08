@@ -125,7 +125,7 @@ $(document).ready(function () {
 <li>Write your solutions in R Markdown in a file named <code>solutions.Rmd</code>.</li>
 <li>When you are ready to submit your assignment, <a href="https://help.github.com/articles/using-pull-requests/#initiating-the-pull-request">initiate a pull request</a>. Title your pull request “Submission”.</li>
 </ol>
-<p>If you need to update from this file</p>
+<p>To update your fork from the upstream repository:</p>
 <ol style="list-style-type: decimal">
 <li>On your fork, e.g. <code>https://github.com/jrnold/Assignment_01</code> click on “New Pull reqest”</li>
 <li>Set your fork <code>jrnold/Assignment_01</code> as the base fork on the left, and <code>UW-POLS503/Assignment_01</code> as the head fork on the right. In both cases the branch will be master. This means, compare any chanes in the head fork that are not in the base fork. You will see differences between the <code>US-POLS503</code> repo and your fork. Click on “Create Pull Request”, and if there are no issues, “Click Merge” A quick way is to use this link, but change the <code>jrnold</code> to your own username: <code>https://github.com/jrnold/Assignment_01/compare/master...UW-POLS503:master</code>.</li>
@@ -532,7 +532,7 @@ RMSE
 </tr>
 </table>
 <ol start="3" style="list-style-type: lower-alpha">
-<li><p>Plot the fitted values of these regressions against the original values. The function <code>augment</code> in the <strong>broom</strong> package is useful for this.</p></li>
+<li><p>Plot the fitted values of these regressions against the original values. The function <code>augment</code> in the <strong>broom</strong> package is useful for this. See examples <a href="https://uw-pols501.github.io/pols_501_wi16/lessons/cov_cor_regression">here</a>.</p></li>
 <li><p>Use the function <code>predict</code> to predict the times of men and women in the 2156 Olympics. Is this plausible?</p></li>
 <li><p>Calculate the square root of the mean of the squared residuals (root mean squared error or RMSE) for the regression <code>time ~ year * women</code>. Predict the values for the years after 2004 for both Olympics and World Championships. What are the root mean squared residuals for these predictions? Is it surprising that the RMSE for the predictions out of the sample are lower than those in the sample?</p></li>
 </ol>
