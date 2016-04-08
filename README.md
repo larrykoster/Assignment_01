@@ -1,5 +1,7 @@
 # POLS 503, Spring 2016: Assignment 1
 
+**Due**: Thurs, April 14, 16:30 PDT.
+
 ## Instructions
 
 1. [Fork this repository](https://help.github.com/articles/using-pull-requests/) to your GitHub account.
@@ -270,7 +272,7 @@ htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric(),
 </tr>
 </table>
   
-c. Plot the fitted values of these regressions against the original values. The function `augment` in the **broom** package is useful for this. See examples [here](https://uw-pols501.github.io/pols_501_wi16/lessons/cov_cor_regression).
+c. Plot the fitted values of these regressions against the original values. The function `augment` in the **broom** package is useful for this. See examples [here](https://uw-pols501.github.io/pols_501_wi16/lessons/cov_cor_regression) or [here](https://uw-pols503.github.io/pols_503_sp16/regressions_in_R.html) for examples.
 
 d. Use the function `predict` to predict the times of men and women in the 2156 Olympics. Is this plausible?
 
