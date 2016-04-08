@@ -7,6 +7,11 @@
 3. When you are ready to submit your assignment, [initiate a pull request](https://help.github.com/articles/using-pull-requests/#initiating-the-pull-request). Title your
 pull request "Submission".
 
+If you need to update from this file
+
+1. On your fork, e.g. `https://github.com/jrnold/Assignment_01` click on "New Pull reqest"
+2. Set your fork `jrnold/Assignment_01` as the base fork on the left, and `UW-POLS503/Assignment_01` as the head fork on the right. In both cases the branch will be master. This means, compare any chanes in the head fork that are not in the base fork. You will see differences between the `US-POLS503` repo and your fork. Click on "Create Pull Request", and if there are no issues, "Click Merge" A quick way is to use this link, but change the `jrnold` to your own username: `https://github.com/jrnold/Assignment_01/compare/master...UW-POLS503:master`.
+
 
 ### Problem 1: Data Wrangling and Viz Refresher
 
