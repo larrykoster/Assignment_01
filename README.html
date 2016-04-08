@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>POLS 503, Spring 2016: Assignment 1</title>
+
+<script src="README_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="README_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="README_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="README_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="README_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="README_files/highlight/default.css"
+      type="text/css" />
+<script src="README_files/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script src="README_files/navigation-1.0/tabsets.js"></script>
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title">POLS 503, Spring 2016: Assignment 1</h1>
+
+</div>
+
+
+<div id="instructions" class="section level2">
+<h2>Instructions</h2>
+<div id="problem-1-data-wrangling-and-viz-refresher" class="section level3">
+<h3>Problem 1: Data Wrangling and Viz Refresher</h3>
+<p>The file <a href="https://raw.githubusercontent.com/POLS503/pols_503_sp15/master/data/democracy.csv">democracy.csv</a> contains data from Przeworski et. al, <em>Demoracy and Deveolpment: Political Institutions and Well-Being in the Worlds, 1950-1990</em> <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. The data have been slightly recoded, to make higher values indicate higher levels of political liberty and democracy.</p>
+<table style="width:64%;">
+<colgroup>
+<col width="15%" />
+<col width="48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>COUNTRY</code></td>
+<td align="left">numerical code for each country</td>
+</tr>
+<tr class="even">
+<td align="left"><code>CTYNAME</code></td>
+<td align="left">name of each country</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>REGION</code></td>
+<td align="left">name of region containing country</td>
+</tr>
+<tr class="even">
+<td align="left"><code>YEAR</code></td>
+<td align="left">year of observation</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>GDPW</code></td>
+<td align="left">GDP per capita in real international prices</td>
+</tr>
+<tr class="even">
+<td align="left"><code>EDT</code></td>
+<td align="left">average years of education</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>ELF60</code></td>
+<td align="left">ethnolinguistic fractionalization</td>
+</tr>
+<tr class="even">
+<td align="left"><code>MOSLEM</code></td>
+<td align="left">percentage of Muslims in country</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>CATH</code></td>
+<td align="left">percentage of Catholics in country</td>
+</tr>
+<tr class="even">
+<td align="left"><code>OIL</code></td>
+<td align="left">whether oil accounts for 50+% of exports</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>STRA</code></td>
+<td align="left">count of recent regime transitions</td>
+</tr>
+<tr class="even">
+<td align="left"><code>NEWC</code></td>
+<td align="left">whether county was created after 1945</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>BRITCOL</code></td>
+<td align="left">whether country was a British colony</td>
+</tr>
+<tr class="even">
+<td align="left"><code>POLLIB</code></td>
+<td align="left">degree of political liberty (1–7 scale, rising in political liberty)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>CIVLIB</code></td>
+<td align="left">degree of civil liberties (1–7 scale, rising in civil liberties)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>REG</code></td>
+<td align="left">presence of democracy (0=non-democracy, 1=democracy)</td>
+</tr>
+</tbody>
+</table>
+<p>For these questions use <strong>ggplot2</strong> for plotting, and <strong>dplyr</strong> and <strong>tidyr</strong> for the data manipulation.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Load the democracy data frame</li>
+</ol>
+<pre class="r"><code>democracy &lt;- read.csv(file = &quot;democracy.csv&quot;, stringsAsFactors = FALSE)</code></pre>
+<p>When you run this, you will notice that some variables that should be numeric are not. There is a problem with how <code>read.csv</code> read missing values. Figure out how this dataset indicates missing values, and add the correct argument to <code>read.csv</code> to fix this problem.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Create a data frame with statistics (means, medians, and ) for all variables. Instead of doing this with <code>summary</code>, use <strong>dplyr</strong> and <strong>tidyr</strong> as shown in the example [<a href="https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting" class="uri">https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting</a>].</li>
+</ol>
+<pre class="r"><code>dem_summary_stats &lt;-
+  ... %&gt;% 
+  group_by(...) %&gt;%
+  summarize(...) %&gt;%
+  gather(...) %&gt;%
+  ungroup(...) %&gt;%
+  unite(...) %&gt;%
+  spread</code></pre>
+<pre><code>Print this table using the function `kable` in the **knitr** package, an the code chunk option `results=&#39;asis`. See the [R Markdown Help](http://rmarkdown.rstudio.com/authoring_rcodechunks.html).</code></pre>
+<ol start="4" style="list-style-type: lower-alpha">
+<li><p>Create a histogram for political liberties in which each unique value of the variable is in its own bin.</p></li>
+<li><p>Create a histogram for GDP per capita.</p></li>
+<li><p>Create a histogram for <strong>log</strong> GDP per capita. How is this histogram different than the one for GDP per capita when it was not logged.</p></li>
+<li><p>Plot political liberties against GDP per capita. If you use a scatterplot, there will be overlap. Figure out a way to plot these two variables so that the pattern (if any) between them is clear. There could be multiple ways to do this, and not necessarily a scatterplot.</p></li>
+<li><p>Plot political liberties against <strong>log</strong> GDP per capita, using the same method as the previous question. How is the relationship different than when GDP per capita was not logged?</p></li>
+<li><p>Create a boxplot of GDP per capita for oil producing and non-oil producing nations. Use <strong>ggplot2</strong>. This should be one plot, not two separate plots.</p></li>
+<li><p>Calculate the mean GDP per capita in countries with at least 40 percent Catholics. How does it compare to mean GDP per capita for all countries? Remember to check the units of Catholic.</p></li>
+<li><p>Calculate the average GDP per capita in countries with greater than 60% ethnolinguistic fractionalization, less than 60%, and missing ethnolinguistic fractionalization. Hint: you can calculate this with the <strong>dplyr</strong> verbs: <code>mutate</code>, <code>group_by</code> and <code>summarize</code>.</p></li>
+<li><p>For all years, calculate the median of the country average years of education all countries? Return this as a data-frame. Hint: use <strong>dplyr</strong> functions: <code>group_by</code>, <code>filter</code>, <code>summarize</code>. Plot the median of the years of education for all years using a line. Also show the original data.</p></li>
+<li><p>Repeat the previous question but group by both year and democracy. Plot separate lines for democracies and non-democries and the original data. Use color to differentiate democracies and non-democracies.</p></li>
+<li><p>Which country was (or countries were) closest to the median years of education in 1985 among all countries? Hint: use <strong>dplyr</strong> functions: <code>filter</code>, <code>mutate</code>, <code>arrange</code>, and <code>slice</code>.</p></li>
+<li><p>What were the 25th and 75th percentiles of ethnolinguistic fractionalization for new and old countries? Return this as a data frame with columns <code>NEWC</code>, <code>ELF60_p25</code>, and <code>ELF60_p75</code>. Print it as a nicely formatted table with <code>kable</code>.</p></li>
+</ol>
+</div>
+</div>
+<div id="problem-2-plotting-data-and-regressions" class="section level2">
+<h2>Problem 2: Plotting data and regressions</h2>
+<p>This question will use a dataset included with R</p>
+<pre class="r"><code>data(&quot;anscombe&quot;)</code></pre>
+<p>The dataset consists of 4 seperate datasets each with an <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variable.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> The original dataset is not a tidy dataset. The following code creates a tidy dataset of the anscombe data that is easier to analyze than the</p>
+<pre class="r"><code>library(&quot;dplyr&quot;)
+library(&quot;tidyr&quot;)
+anscombe2 &lt;- anscombe %&gt;%
+    mutate(obs = row_number()) %&gt;%
+    gather(variable_dataset, value, - obs) %&gt;%
+    separate(variable_dataset, c(&quot;variable&quot;, &quot;dataset&quot;), sep = 1L) %&gt;%
+    spread(variable, value) %&gt;%
+    arrange(dataset, obs)</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li><p>For each dataset: calculate the mean and standard deviations of x and y, and correlation between x and y, and run a linear regression between x and y for each dataset. How similar do you think that these datasets will look?</p></li>
+<li><p>Create a scatter plot of each dataset and its linear regression fit. Hint: you can do this easily with facet_wrap.</p></li>
+</ol>
+</div>
+<div id="problem-3-predicting-sprint-times" class="section level2">
+<h2>Problem 3: Predicting Sprint Times</h2>
+<p>In a 2004 paper in <em>Nature</em>, Tatem et al. estimate the trend lines of sprint times for men and women using the winning times of the 100-meters in the Olympics.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> They report that using current trends, in the 2156 Olympics, the women’s 100-meter will have a faster time.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+<p>The dataset includes the winning times from the 100-meter dash for both men and women for all Olympics 1900-2012 and Track &amp; Field World Championships finals 1976-2015.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>year</code></td>
+<td align="left">Year of the Olympics or World Championships</td>
+</tr>
+<tr class="even">
+<td align="left"><code>time</code></td>
+<td align="left">Winning time</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>women</code></td>
+<td align="left">1 if women’s race; 0 if men’s race</td>
+</tr>
+<tr class="even">
+<td align="left"><code>olympics</code></td>
+<td align="left">1 if in the olympics; 0 if in the World Championships</td>
+</tr>
+</tbody>
+</table>
+<p>Load the data into R from the csv file:</p>
+<pre class="r"><code>sprinters &lt;- read.csv(&quot;sprinters.csv&quot;)</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li>The referenced paper only used data from the Olympics 2004 and before. Create a new dataset named <code>sprinters_orig</code> with only those observations.</li>
+</ol>
+<pre class="r"><code>sprinters_orig &lt;-
+  filter(sprinters,
+         year &lt;= 2004,
+         olympics == 1)</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Run the regressions</li>
+</ol>
+<pre class="r"><code>library(&quot;dplyr&quot;)
+mod1 &lt;- lm(time ~ year + women, data = sprinters_orig)
+mod2 &lt;- lm(time ~ year * women, data = sprinters_orig)
+mod3 &lt;- lm(time ~ year, data = filter(sprinters_orig, women == 1))
+mod4 &lt;- lm(time ~ year, data = filter(sprinters_orig, women == 0))</code></pre>
+<p>Interpret each regression. How are they similar or different in their slopes? Plot each of these using the <strong>texreg</strong> package.</p>
+<pre class="r"><code>library(&quot;texreg&quot;)
+htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric())</code></pre>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<table cellspacing="0" align="center" style="border: none;">
+<caption align="bottom" style="margin-top:0.3em;">
+Statistical models
+</caption>
+<tr>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;">
+<b></b>
+</th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;">
+<b>Model 1</b>
+</th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;">
+<b>Model 2</b>
+</th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;">
+<b>Model 3</b>
+</th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;">
+<b>Model 4</b>
+</th>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">
+(Intercept)
+</td>
+<td style="padding-right: 12px; border: none;">
+34.96
+</td>
+<td style="padding-right: 12px; border: none;">
+31.83
+</td>
+<td style="padding-right: 12px; border: none;">
+44.35
+</td>
+<td style="padding-right: 12px; border: none;">
+31.83
+</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">
+</td>
+<td style="padding-right: 12px; border: none;">
+(1.96)
+</td>
+<td style="padding-right: 12px; border: none;">
+(2.13)
+</td>
+<td style="padding-right: 12px; border: none;">
+(4.28)
+</td>
+<td style="padding-right: 12px; border: none;">
+(1.68)
+</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">
+year
+</td>
+<td style="padding-right: 12px; border: none;">
+-0.01
+</td>
+<td style="padding-right: 12px; border: none;">
+-0.01
+</td>
+<td style="padding-right: 12px; border: none;">
+-0.02
+</td>
+<td style="padding-right: 12px; border: none;">
+-0.01
+</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">
+</td>
+<td style="padding-right: 12px; border: none;">
+(0.00)
+</td>
+<td style="padding-right: 12px; border: none;">
+(0.00)
+</td>
+<td style="padding-right: 12px; border: none;">
+(0.00)
+</td>
+<td style="padding-right: 12px; border: none;">
+(0.00)
+</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">
+women
+</td>
+<td style="padding-right: 12px; border: none;">
+1.09
+</td>
+<td style="padding-right: 12px; border: none;">
+12.52
+</td>
+<td style="padding-right: 12px; border: none;">
+</td>
+<td style="padding-right: 12px; border: none;">
+</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">
+</td>
+<td style="padding-right: 12px; border: none;">
+(0.06)
+</td>
+<td style="padding-right: 12px; border: none;">
+(4.08)
+</td>
+<td style="padding-right: 12px; border: none;">
+</td>
+<td style="padding-right: 12px; border: none;">
+</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">
+year:women
+</td>
+<td style="padding-right: 12px; border: none;">
+</td>
+<td style="padding-right: 12px; border: none;">
+-0.01
+</td>
+<td style="padding-right: 12px; border: none;">
+</td>
+<td style="padding-right: 12px; border: none;">
+</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">
+</td>
+<td style="padding-right: 12px; border: none;">
+</td>
+<td style="padding-right: 12px; border: none;">
+(0.00)
+</td>
+<td style="padding-right: 12px; border: none;">
+</td>
+<td style="padding-right: 12px; border: none;">
+</td>
+</tr>
+<tr>
+<td style="border-top: 1px solid black;">
+R<sup style="vertical-align: 0px;">2</sup>
+</td>
+<td style="border-top: 1px solid black;">
+0.91
+</td>
+<td style="border-top: 1px solid black;">
+0.93
+</td>
+<td style="border-top: 1px solid black;">
+0.79
+</td>
+<td style="border-top: 1px solid black;">
+0.88
+</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">
+Adj. R<sup style="vertical-align: 0px;">2</sup>
+</td>
+<td style="padding-right: 12px; border: none;">
+0.91
+</td>
+<td style="padding-right: 12px; border: none;">
+0.92
+</td>
+<td style="padding-right: 12px; border: none;">
+0.78
+</td>
+<td style="padding-right: 12px; border: none;">
+0.88
+</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">
+Num. obs.
+</td>
+<td style="padding-right: 12px; border: none;">
+42
+</td>
+<td style="padding-right: 12px; border: none;">
+42
+</td>
+<td style="padding-right: 12px; border: none;">
+18
+</td>
+<td style="padding-right: 12px; border: none;">
+24
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid black;">
+RMSE
+</td>
+<td style="border-bottom: 2px solid black;">
+0.19
+</td>
+<td style="border-bottom: 2px solid black;">
+0.17
+</td>
+<td style="border-bottom: 2px solid black;">
+0.21
+</td>
+<td style="border-bottom: 2px solid black;">
+0.13
+</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;" colspan="6">
+<span style="font-size:0.8em"></span>
+</td>
+</tr>
+</table>
+<ol start="3" style="list-style-type: lower-alpha">
+<li><p>Plot the fitted values of these regressions against the original values. The function <code>augment</code> in the <strong>broom</strong> package is useful for this.</p></li>
+<li><p>Use the function <code>predict</code> to predict the times of men and women in the 2156 Olympics. Is this plausible?</p></li>
+<li><p>Calculate the square root of the mean of the squared residuals (root mean squared error or RMSE) for the regression <code>time ~ year * women</code>. Predict the values for the years after 2004 for both Olympics and World Championships. What are the root mean squared residuals for these predictions? Is it surprising that the RMSE for the predictions out of the sample are lower than those in the sample?</p></li>
+</ol>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Przeworski, Adam, Michael E. Alvarez, Jose Antonio Cheibub, and Fernando Limongi. 2000. <em>Democracy and Development: Political Institutions and Well-Being in the World, 1950-1990</em>. Cambridge University Press.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>These data are from: Anscombe, F. J. (1973). “Graphs in Statistical Analysis”. <em>American Statistician</em> 27 (1): 17–21.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Andrew J. Tatem, Carlos A. Guerra, Peter M. Atkinson &amp; Simon I. Hay. 2004. “Athletics: Momentous sprint at the 2156 Olympics?” <em>Nature.</em> <a href="https://dx.doi.org/10.1038/431525" class="uri">https://dx.doi.org/10.1038/431525</a><a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>I’ve read the short article several times. I still can’t tell whether it is tongue in cheek.<a href="#fnref4">↩</a></p></li>
+</ol>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

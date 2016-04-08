@@ -1,6 +1,4 @@
----
-title: "POLS 503, Spring 2016: Assignment 1"
----
+# POLS 503, Spring 2016: Assignment 1
 
 ## Instructions
 
@@ -33,7 +31,8 @@ For these questions use **ggplot2** for plotting, and **dplyr** and **tidyr** fo
 
 a. Load the democracy data frame
 
-```{r}
+
+```r
 democracy <- read.csv(file = "democracy.csv", stringsAsFactors = FALSE)
 ```
 
@@ -90,13 +89,15 @@ q. What were the 25th and 75th percentiles of ethnolinguistic fractionalization 
 ## Problem 2: Plotting data and regressions
 
 This question will use a dataset included with R
-```{r}
+
+```r
 data("anscombe")
 ```
 The dataset consists of 4 seperate datasets each with an $x$ and $y$ variable.[^anscombe]
 The original dataset is not a tidy dataset.
 The following code creates a tidy dataset of the anscombe data that is easier to analyze than the 
-```{r message=FALSE, results='hide'}
+
+```r
 library("dplyr")
 library("tidyr")
 anscombe2 <- anscombe %>%
@@ -105,7 +106,6 @@ anscombe2 <- anscombe %>%
 	separate(variable_dataset, c("variable", "dataset"), sep = 1L) %>%
 	spread(variable, value) %>%
 	arrange(dataset, obs)
-
 ```
 
 a. For each dataset: calculate the mean and standard deviations of x and y, and correlation between x and y, and run a linear regression between x and y for each dataset. How similar do you think that these datasets will look?
@@ -126,13 +126,15 @@ The dataset includes the winning times from the 100-meter dash for both men and 
 | `olympics` | 1 if in the olympics; 0 if in the World Championships |
 
 Load the data into R from the csv file:
-```{r}
+
+```r
 sprinters <- read.csv("sprinters.csv")
 ```
 
 a. The referenced paper only used data from the Olympics 2004 and before. Create a new dataset named `sprinters_orig` with only those observations.
 
-```{r}
+
+```r
 sprinters_orig <-
   filter(sprinters,
          year <= 2004,
@@ -140,7 +142,8 @@ sprinters_orig <-
 ```
 
 b. Run the regressions
-```{r, results = 'hide'}
+
+```r
 library("dplyr")
 mod1 <- lm(time ~ year + women, data = sprinters_orig)
 mod2 <- lm(time ~ year * women, data = sprinters_orig)
@@ -149,10 +152,111 @@ mod4 <- lm(time ~ year, data = filter(sprinters_orig, women == 0))
 ```
 Interpret each regression. How are they similar or different in their 
 slopes? Plot each of these using the **texreg** package.
-```{r results='asis', message = FALSE}
+
+```r
 library("texreg")
 htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric())
 ```
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<table cellspacing="0" align="center" style="border: none;">
+<caption align="bottom" style="margin-top:0.3em;">Statistical models</caption>
+<tr>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b></b></th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b>Model 1</b></th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b>Model 2</b></th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b>Model 3</b></th>
+<th style="text-align: left; border-top: 2px solid black; border-bottom: 1px solid black; padding-right: 12px;"><b>Model 4</b></th>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">(Intercept)</td>
+<td style="padding-right: 12px; border: none;">34.96</td>
+<td style="padding-right: 12px; border: none;">31.83</td>
+<td style="padding-right: 12px; border: none;">44.35</td>
+<td style="padding-right: 12px; border: none;">31.83</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(1.96)</td>
+<td style="padding-right: 12px; border: none;">(2.13)</td>
+<td style="padding-right: 12px; border: none;">(4.28)</td>
+<td style="padding-right: 12px; border: none;">(1.68)</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">year</td>
+<td style="padding-right: 12px; border: none;">-0.01</td>
+<td style="padding-right: 12px; border: none;">-0.01</td>
+<td style="padding-right: 12px; border: none;">-0.02</td>
+<td style="padding-right: 12px; border: none;">-0.01</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.00)</td>
+<td style="padding-right: 12px; border: none;">(0.00)</td>
+<td style="padding-right: 12px; border: none;">(0.00)</td>
+<td style="padding-right: 12px; border: none;">(0.00)</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">women</td>
+<td style="padding-right: 12px; border: none;">1.09</td>
+<td style="padding-right: 12px; border: none;">12.52</td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.06)</td>
+<td style="padding-right: 12px; border: none;">(4.08)</td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">year:women</td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">-0.01</td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;">(0.00)</td>
+<td style="padding-right: 12px; border: none;"></td>
+<td style="padding-right: 12px; border: none;"></td>
+</tr>
+<tr>
+<td style="border-top: 1px solid black;">R<sup style="vertical-align: 0px;">2</sup></td>
+<td style="border-top: 1px solid black;">0.91</td>
+<td style="border-top: 1px solid black;">0.93</td>
+<td style="border-top: 1px solid black;">0.79</td>
+<td style="border-top: 1px solid black;">0.88</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">Adj. R<sup style="vertical-align: 0px;">2</sup></td>
+<td style="padding-right: 12px; border: none;">0.91</td>
+<td style="padding-right: 12px; border: none;">0.92</td>
+<td style="padding-right: 12px; border: none;">0.78</td>
+<td style="padding-right: 12px; border: none;">0.88</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;">Num. obs.</td>
+<td style="padding-right: 12px; border: none;">42</td>
+<td style="padding-right: 12px; border: none;">42</td>
+<td style="padding-right: 12px; border: none;">18</td>
+<td style="padding-right: 12px; border: none;">24</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid black;">RMSE</td>
+<td style="border-bottom: 2px solid black;">0.19</td>
+<td style="border-bottom: 2px solid black;">0.17</td>
+<td style="border-bottom: 2px solid black;">0.21</td>
+<td style="border-bottom: 2px solid black;">0.13</td>
+</tr>
+<tr>
+<td style="padding-right: 12px; border: none;" colspan="6"><span style="font-size:0.8em"></span></td>
+</tr>
+</table>
   
 c. Plot the fitted values of these regressions against the original values. The function `augment` in the **broom** package is useful for this.
 
