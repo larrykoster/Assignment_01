@@ -1,0 +1,48 @@
+---
+title: "Answers_Assignment_01"
+author: "lkoster"
+date: "April 7, 2016"
+output: html_document
+---
+
+library(dplyr)
+library(broom)
+library(texreg)
+
+## Problem 3: Predicting Sprint Times
+
+|:---|:---|
+| `year` | Year of the Olympics or World Championships |
+| `time` | Winning time |
+| `women` | 1 if women's race; 0 if men's race |
+| `olympics` | 1 if in the olympics; 0 if in the World Championships |
+
+Load the data into R,
+```{r, eval = FALSE}
+sprinters <- read.csv("sprinters.csv")
+```
+
+
+#a. The referenced paper only used data from the Olympics 2004 and before. Create a new dataset named #`sprinters_orig` with only those observations.
+
+sprinters_orig <- sprinters %>%
+  filter (year %in% )
+
+  select(varnames) %>%
+
+  
+
+
+
+b. Run the regressions
+    ```{r, eval = FALSE}
+  model1 <-   lm(time ~ year + women, data = sprinters_orig)
+  model2 <- lm(time ~ year * women, data = sprinters_orig)
+  model3 <-   lm(time ~ year, data = filter(sprinters_orig, women == 1))
+  model4 <-   lm(time ~ year, data = filter(sprinters_orig, women == 0))
+    ```
+    Interpret each regression. How are they similar or different in their 
+    slopes?
+  
+c. Plot the results of these regressions.
+d. Use the function `predict` to predict the times of men and women in the 2156 Olympics. Is this plausible? 
