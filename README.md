@@ -91,7 +91,7 @@ n. Which country was (or countries were) closest to the median years of educatio
 
 q. What were the 25th and 75th percentiles of ethnolinguistic fractionalization for new and old countries? Return this as a data frame with columns `NEWC`, `ELF60_p25`, and `ELF60_p75`. Print it as a nicely formatted table with `kable`.
 
-## Problem 2: Plotting data and regressions
+### Problem 2: Plotting data and regressions
 
 This question will use a dataset included with R
 
@@ -117,7 +117,7 @@ a. For each dataset: calculate the mean and standard deviations of x and y, and 
 
 b. Create a scatter plot of each dataset and its linear regression fit. Hint: you can do this easily with facet_wrap.
 
-## Problem 3: Predicting Sprint Times
+### Problem 3: Predicting Sprint Times
 
 In a 2004 paper in *Nature*, Tatem et al. estimate the trend lines of sprint times for men and women using the winning times of the 100-meters in the Olympics.[^sprint1] They report that using current trends, in the 2156 Olympics, the women's 100-meter will have a faster time.[^sprint2]
 

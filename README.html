@@ -239,9 +239,8 @@ $(document).ready(function () {
 <li><p>What were the 25th and 75th percentiles of ethnolinguistic fractionalization for new and old countries? Return this as a data frame with columns <code>NEWC</code>, <code>ELF60_p25</code>, and <code>ELF60_p75</code>. Print it as a nicely formatted table with <code>kable</code>.</p></li>
 </ol>
 </div>
-</div>
-<div id="problem-2-plotting-data-and-regressions" class="section level2">
-<h2>Problem 2: Plotting data and regressions</h2>
+<div id="problem-2-plotting-data-and-regressions" class="section level3">
+<h3>Problem 2: Plotting data and regressions</h3>
 <p>This question will use a dataset included with R</p>
 <pre class="r"><code>data(&quot;anscombe&quot;)</code></pre>
 <p>The dataset consists of 4 seperate datasets each with an <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> variable.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> The original dataset is not a tidy dataset. The following code creates a tidy dataset of the anscombe data that is easier to analyze than the</p>
@@ -258,8 +257,8 @@ anscombe2 &lt;- anscombe %&gt;%
 <li><p>Create a scatter plot of each dataset and its linear regression fit. Hint: you can do this easily with facet_wrap.</p></li>
 </ol>
 </div>
-<div id="problem-3-predicting-sprint-times" class="section level2">
-<h2>Problem 3: Predicting Sprint Times</h2>
+<div id="problem-3-predicting-sprint-times" class="section level3">
+<h3>Problem 3: Predicting Sprint Times</h3>
 <p>In a 2004 paper in <em>Nature</em>, Tatem et al. estimate the trend lines of sprint times for men and women using the winning times of the 100-meters in the Olympics.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> They report that using current trends, in the 2156 Olympics, the women’s 100-meter will have a faster time.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
 <p>The dataset includes the winning times from the 100-meter dash for both men and women for all Olympics 1900-2012 and Track &amp; Field World Championships finals 1976-2015.</p>
 <table>
@@ -532,6 +531,7 @@ RMSE
 <li><p>Use the function <code>predict</code> to predict the times of men and women in the 2156 Olympics. Is this plausible?</p></li>
 <li><p>Calculate the square root of the mean of the squared residuals (root mean squared error or RMSE) for the regression <code>time ~ year * women</code>. Predict the values for the years after 2004 for both Olympics and World Championships. What are the root mean squared residuals for these predictions? Is it surprising that the RMSE for the predictions out of the sample are lower than those in the sample?</p></li>
 </ol>
+</div>
 </div>
 <div class="footnotes">
 <hr />
