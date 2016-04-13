@@ -51,7 +51,7 @@ democracy <- read.csv(file = "democracy.csv", stringsAsFactors = FALSE)
 
 When you run this, you will notice that `POLLIB` and `CIVLIB`, which should be integer variables with values 1--7, are character variables. There is a problem with how `read.csv` reads missing values. Figure out how this dataset indicates missing values, and add the correct argument to `read.csv` to fix this problem.
 
-a. Create a data frame with statistics (minimum, mean, sd, and maximum) for all variables but COUNTRY, CTYNAME, REGION, and YEAR. Instead of doing this with `summary`, use **dplyr** and **tidyr** as shown in (this)[https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting] example. 
+a. Create a data frame with statistics (minimum, mean, sd, and maximum) for all variables but COUNTRY, CTYNAME, REGION, and YEAR. Instead of doing this with `summary`, use **dplyr** and **tidyr** as shown in [this](https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting) example. 
 
 ```r
 dem_summary_stats <-
