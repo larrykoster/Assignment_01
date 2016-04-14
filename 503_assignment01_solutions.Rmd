@@ -1,0 +1,277 @@
+---
+title: "assignment1_solutions1"
+author: "lkoster"
+date: "April 14, 2016"
+output: html_document
+---
+
+# Problem 1
+a. Load the democracy data frame
+
+  ```{r, eval = FALSE}
+  democracy <- read.csv(file =   "http://pols503.github.io/pols_503_sp15/data/democracy.csv", stringsAsFactors = FALSE)
+  ```
+  When you run this, you will notice that some variables that should be numeric are not. There is a problem with how `read.csv` read missing values. Figure out how this dataset indicates missing values, and add the correct argument to `read.csv` to fix this problem.
+
+
+```{r, results='hide'}
+# a.
+democracy <- read.csv("democracy.csv", stringsAsFactors = FALSE, na.strings=".")
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(knitr)
+```
+b. Create a data frame with statistics (means, medians, and ) for all variables. Instead of doing this with `summary`, use **dplyr** and **tidyr** as shown in the example [https://uw-pols501.github.io/pols_501_wi16/lessons/gapminder_intro_to_dplyr_tidyr.html#plotting]. 
+
+    ```r
+    dem_summary_stats <-
+      ... %>% 
+      group_by(...) %>%
+      summarize(...) %>%
+      gather(...) %>%
+      ungroup(...) %>%
+      unite(...) %>%
+      spread
+    ```
+    
+  ```{r, results='hide'}
+dem_by_variable <- 
+  democracy %>%
+  gather(variable, value, -COUNTRY, -YEAR, -REGION, -CTYNAME)
+dem_by_variable
+
+dem_summary_stats <- dem_by_variable %>%
+  group_by(variable, CTYNAME) %>%
+  summarise(mean = mean(value),
+            median = median(value)) %>%
+  gather(stat, value, -CTYNAME, -variable) %>%
+  ungroup() %>%
+  unite(variable_stat, variable, stat) %>%
+  spread(variable_stat, value)
+```{r, results='hide'}
+# b.
+dem_by_variable <- 
+  democracy %>%
+  gather(variable, value, -COUNTRY, -YEAR, -REGION, -CTYNAME)
+dem_by_variable
+
+dem_summary_stats <- dem_by_variable %>%
+  group_by(variable, CTYNAME) %>%
+  summarise(mean = mean(value),
+            median = median(value)) %>%
+  gather(stat, value, -CTYNAME, -variable) %>%
+  ungroup() %>%
+  unite(variable_stat, variable, stat) %>%
+  spread(variable_stat, value)
+```
+c. Print this table using the function `kable` in the **knitr** package, an the code chunk option `results='asis`. See the [R Markdown Help](http://rmarkdown.rstudio.com/authoring_rcodechunks.html).
+```{r, results='asis'}
+#c.
+kable(dem_summary_stats)
+```
+d. Create a histogram for political liberties in which each unique
+value of the variable is in its own bin.
+```{r}
+#d.
+ggplot(democracy, aes(x=POLLIB))+geom_histogram()
+```
+e. Create a histogram for GDP per capita.
+```{r}
+#e.
+ggplot(democracy, aes(x=GDPW))+geom_histogram()
+```
+f. Create a histogram for **log** GDP per capita. How is this histogram different than the one for GDP per capita when it was not logged.
+```{r}
+#f.
+ggplot(democracy, aes(x=log(GDPW)))+geom_histogram()
+```
+g. Plot political liberties against GDP per capita. If you use 
+   a scatterplot, there will be overlap. Figure out a way to plot
+   these two variables so that the pattern (if any) between them is 
+   clear. There could be multiple ways to do this, and not necessarily a scatterplot.
+```{r}
+#g.
+ggplot(democracy, aes(x=GDPW, y=POLLIB))+geom_jitter(width=0.5, height=0.2)
+```
+i. Plot political liberties against **log** GDP per
+   capita, using the same method as the previous question.  How is the relationship different than  when GDP per capita was not logged?
+```{r}
+#i.
+ggplot(democracy, aes(x=log(GDPW), y=POLLIB))+geom_jitter(width=1, height=0.5)
+```
+j. Create a boxplot of GDP per capita for oil producing and non-oil producing nations. Use **ggplot2**. This should be one plot, not two separate plots.
+```{r}
+#j.
+ggplot(democracy, aes(x=factor(OIL), y=log(GDPW)))+geom_boxplot()
+```
+k. Calculate the mean GDP per capita in countries with at least 40 percent Catholics. How does it compare to mean GDP per capita for all countries? Remember to check the units of Catholic.
+```{r}
+#k
+demcath <- democracy %>%
+  filter(CATH>40) %>%
+  mutate(meangdpcath=mean(GDPW, na.rm=T))
+unique(demcath$meangdpcath)
+demall <- democracy %>%
+  mutate(meangdp=mean(GDPW, na.rm=T))
+unique(demall$meangdp)
+# GDP per capita is higher in countries where at least 40% of the population is Catholic.
+```
+
+```{r}
+#l1
+demfrac <- democracy %>%
+  filter(ELF60>0.60) %>%
+  mutate(meangdpfrac=mean(GDPW, na.rm=T))
+unique(demfrac$meangdpfrac)
+```
+
+```{r}
+#l2
+demnofrac <- democracy %>%
+  filter(ELF60<0.60) %>%
+  mutate(meangdpnofrac=mean(GDPW, na.rm=T))
+unique(demnofrac$meangdpnofrac)
+```
+
+```{r}
+#l3 
+demnafrac <- democracy %>%
+  filter(ELF60=NA) %>%
+  mutate(meangdpnafrac=mean(GDPW))
+unique(demnafrac$meangdpnafrac)
+```
+
+```{r}
+#m
+educ <-democracy %>% 
+  group_by(YEAR) %>% 
+  summarise(medianEDT = median(EDT, na.rm=T)) %>% 
+  arrange(YEAR)
+ggplot(educ, aes(x=medianEDT, y=YEAR))+geom_line()
+```
+
+```{r}
+#o
+educ2 <-democracy %>% 
+  group_by(REG, YEAR) %>% 
+  summarise(medianEDT = median(EDT, na.rm=T)) %>% 
+  arrange(REG)
+  
+ggplot(educ2, aes(x=YEAR, y=medianEDT, col=factor(REG)))+geom_point()+geom_smooth(method="lm")
+```
+```{r}
+#n 
+median <- democracy %>%
+  filter(YEAR == 1985, !is.na(EDT)) %>%
+  arrange(EDT) %>%
+  slice(113/2)
+median
+```
+
+```{r}
+#q 
+percentiles <- 
+  democracy %>%
+  group_by(NEWC) %>%
+  summarize(ELF60_p25 = quantile(ELF60, probs = .25, na.rm = T),
+            ELF60_p75 = quantile(ELF60, probs = .75, na.rm = T))
+
+kable(percentiles, format = "markdown")
+```
+
+```{r}
+#Problem 2
+data("anscombe")
+library("dplyr")
+library("tidyr")
+anscombe2 <- anscombe %>%
+    mutate(obs = row_number()) %>%
+    gather(variable_dataset, value, - obs) %>%
+    separate(variable_dataset, c("variable", "dataset"), sep = 1L) %>%
+    spread(variable, value) %>%
+    arrange(dataset, obs)
+```
+
+```{r}
+#a.
+anscombe2 %>%
+  group_by(dataset) %>%
+  summarize(meanx=mean(x, na.rm=TRUE),
+            meany=mean(y, na.rm=TRUE),
+            sdx=sd(x, na.rm = TRUE),
+            sdy = sd(y, na.rm=TRUE),
+            cor_xy=cor(x, y))
+reg1 <- lm(x~y, data=filter(anscombe2, dataset==1))
+reg1
+reg2 <- lm(x~y, data=filter(anscombe2, dataset==2))
+reg2
+reg3 <- lm(x~y, data=filter(anscombe2, dataset==3))
+reg3
+reg4 <- lm(x~y, data=filter(anscombe2, dataset==4))
+reg4
+
+#b
+
+plot1 <- ggplot(aes(x=x, y=y),
+                data=filter(anscombe2, dataset==1))+
+  geom_point()+
+  geom_smooth(method="lm")
+plot1
+plot2 <- ggplot(aes(x=x, y=y),
+                data=filter(anscombe2, dataset==2))+
+  geom_point()+
+  geom_smooth(method="lm")
+plot2
+plot3 <- ggplot(aes(x=x, y=y),
+                data=filter(anscombe2, dataset==3))+
+  geom_point()+
+  geom_smooth(method="lm")
+plot3
+plot4 <- ggplot(aes(x=x, y=y),
+                data=filter(anscombe2, dataset==4))+
+  geom_point()+
+  geom_smooth(method="lm")
+plot4
+```
+
+```{r}
+# Problem 3
+sprinters <- read.csv("sprinters.csv")
+```
+
+```{r}
+#a.
+sprinters_orig <- sprinters[sprinters$year<2005,]
+library(dplyr)
+sprinters_orig <- filter(sprinters, year<2005, olympics==1)
+```
+```{r, eval = FALSE} 
+#b.
+reg1 <- lm(time ~ year + women, data = sprinters_orig) 
+reg2 <- lm(time ~ year * women, data = sprinters_orig) 
+reg3 <- lm(time ~ year, data = filter(sprinters_orig, women == 1)) 
+reg4 <- lm(time ~ year, data = filter(sprinters_orig, women == 0)) 
+```
+```{r,eval=FALSE, results='asis'}
+library(texreg)
+htmlreg(list(reg1, reg2, reg3, reg4), stars = numeric(),
+        caption="Trends in Winning Times in the Olympic 100-meter dash, 1896-2004")
+```
+```{r}
+#c
+
+data2 <- data.frame(actual=reg1$model$time, predicted=reg1$fitted.values)
+
+regs_plot <- ggplot(data2, aes(x=actual, y= predicted))+
+  geom_point()+
+  geom_smooth(method="lm")
+
+regs_plot
+```
+```{r}
+#d
+yearnew <- data.frame(women=c(1,0),
+                      year=2156)
+predict(reg1, newdata=yearnew)
+```
