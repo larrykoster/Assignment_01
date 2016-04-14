@@ -91,7 +91,7 @@ l. Calculate the average GDP per capita in countries with greater than
    ethnolinguistic fractionalization.  Hint: you can calculate this
    with the **dplyr** verbs: `mutate`, `group_by` and `summarize`.
 
-m. For all years, calculate the median of the country average years of education all countries? Return this as a data-frame. Hint: use **dplyr** functions: `group_by`, `filter`, `summarize`. Plot the median of the years of education for all years using a line. Also show the original data.
+m. For all years, calculate the median average years of education. Return this as a data-frame. Hint: use **dplyr** functions: `group_by`, `filter`, `summarize`. Plot the median of the years of education for all years using a line. Also show the original data.
 
 o. Repeat the previous question but group by both year and democracy. Plot separate lines for democracies and non-democries and the original data. Use color to differentiate democracies and non-democracies.
 
@@ -272,7 +272,9 @@ htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric(),
 </tr>
 </table>
   
-c. Plot the fitted values of these regressions against the original values. The function `augment` in the **broom** package is useful for this. See examples [here](https://uw-pols501.github.io/pols_501_wi16/lessons/cov_cor_regression) or [here](https://uw-pols503.github.io/pols_503_sp16/regressions_in_R.html) for examples.
+c. Plot the fitted values of one of the regressions against the original values. The function `augment` in the **broom** package is useful for this. See examples [here](https://uw-pols501.github.io/pols_501_wi16/lessons/cov_cor_regression) or [here](https://uw-pols503.github.io/pols_503_sp16/regressions_in_R.html) for examples.
+
+Extra Credit: Do the same not only for one but for all four regressions. Create a new datasets with 3 variables (`actual`, `fitted`, and `model`) that contains the information from all of the models. Then, use `ggplot` and the `facet_wrap` to create the 4 plots (2 by 2) in only 1 command.
 
 d. Use the function `predict` to predict the times of men and women in the 2156 Olympics. Is this plausible?
 
