@@ -272,9 +272,9 @@ htmlreg(list(mod1, mod2, mod3, mod4), stars = numeric(),
 </tr>
 </table>
   
-c. Plot the fitted values of one of the regressions against the original values. The function `augment` in the **broom** package is useful for this. See examples [here](https://uw-pols501.github.io/pols_501_wi16/lessons/cov_cor_regression) or [here](https://uw-pols503.github.io/pols_503_sp16/regressions_in_R.html) for examples.
+c. Plot the fitted values of the first regression (`mod1`) against the original values. The function `augment` in the **broom** package is useful for this. See examples [here](https://uw-pols501.github.io/pols_501_wi16/lessons/cov_cor_regression) or [here](https://uw-pols503.github.io/pols_503_sp16/regressions_in_R.html) for examples.
 
-Extra Credit: Do the same not only for one but for all four regressions. Create a new datasets with 3 variables (`actual`, `fitted`, and `model`) containing the information from all of the models. Then, use `ggplot` and the `facet_wrap` to create the 4 plots (2 by 2) in only 1 command.
+Extra Credit: Do the same not only for one but for all four regressions. Create a new datasets with 3 variables (`actual`, `fitted`, and `model`) containing the information from all the models. Then, use `ggplot` and the `facet_wrap` to create the 4 plots (2 by 2) in only 1 command.
 
 d. Use the function `predict` to predict the times of men and women in the 2156 Olympics. Is this plausible?
 
